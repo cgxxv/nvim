@@ -36,7 +36,7 @@ return {
     end,
   },
 
-  -- -- lf file manager
+  -- lf file manager
   -- ["nvim-lua/plenary.nvim"] = {},
   -- ["akinsho/toggleterm.nvim"] = {
   --   tag = "*",
@@ -45,19 +45,18 @@ return {
   --   end
   -- },
   -- ["lmburns/lf.nvim"] = {
-  --   after = "plenary.nvim",
   --   config = function()
   --     -- This feature will not work if the plugin is lazy-loaded
   --     vim.g.lf_netrw = 1
-
+  --
   --     require("lf").setup(
-  --         {
-  --             escape_quit = false,
-  --             border = "rounded",
-  --             highlights = {FloatBorder = {guifg = require("kimbox.palette").colors.magenta}}
-  --         }
+  --       {
+  --         escape_quit = false,
+  --         border = "rounded",
+  --         -- highlights = {FloatBorder = {guifg = require("kimbox.palette").colors.magenta}}
+  --       }
   --     )
-
+  --
   --     vim.keymap.set("n", "<Leader>2f", ":Lf<CR>")
   --   end,
   --   requires = {"plenary.nvim", "toggleterm.nvim"}
