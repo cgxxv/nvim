@@ -16,6 +16,7 @@ M.mason = {
     -- lua stuff
     "lua-language-server",
     "stylua",
+    "luacheck",
 
     -- web dev stuff
     "css-lsp",
@@ -25,6 +26,8 @@ M.mason = {
     "emmet-ls",
     "json-lsp",
     "jq",
+    -- "jshint", -- not exists
+    "jsonlint",
 
     -- yaml
     "yaml-language-server",
@@ -37,6 +40,10 @@ M.mason = {
     "delve",
     "golangci-lint",
     "goimports",
+    "golines",
+    "gofumpt",
+    -- "staticcheck",
+    -- "revive",
 
     -- python
     -- "pyright-langserver",
@@ -74,6 +81,9 @@ M.mason = {
 
     -- awk
     "awk-language-server",
+
+    -- writting
+    "write-good",
   },
 }
 
