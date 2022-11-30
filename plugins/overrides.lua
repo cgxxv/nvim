@@ -34,6 +34,14 @@ M.mason = {
     "yamlfmt",
     "yamllint",
 
+    -- python
+    -- "refactoring",
+    "flake8",
+    "autopep8",
+    "black",
+    "isort",
+    "yapf",
+
     -- golang
     "gopls",
     "go-debug-adapter",
@@ -89,10 +97,15 @@ M.mason = {
 
 -- git support in nvimtree
 M.nvimtree = {
+  -- filters = {
+  --   dotfiles = false,
+  -- },
   git = {
     enable = true,
+    ignore = false,
   },
 
+  update_cwd = false,
   renderer = {
     highlight_git = true,
     icons = {

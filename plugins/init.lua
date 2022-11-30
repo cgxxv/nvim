@@ -36,6 +36,48 @@ return {
     end,
   },
 
+  -- ["nvim-lualine/lualine.nvim"] = {
+  --   requires = { "kyazdani42/nvim-web-devicons", opt = true },
+  --   config = function()
+  --     require("lualine").setup {
+  --       sections = {
+  --         lualine_a = {
+  --           "buffers",
+  --           show_filename_only = false,
+  --           buffers_color = {
+  --             -- Same values as the general color option can be used here.
+  --             active = "lualine_{section}_normal", -- Color for active buffer.
+  --             inactive = "lualine_{section}_inactive", -- Color for inactive buffer.
+  --           },
+  --           symbols = {
+  --             modified = " ●", -- Text to show when the buffer is modified
+  --             alternate_file = "#", -- Text to show to identify the alternate file
+  --             directory = "", -- Text to show when the buffer is a directory
+  --           },
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
+
+  -- ["m-demare/hlargs.nvim"] = {
+  --   config = function()
+  --     require("hlargs").setup()
+  --   end,
+  -- },
+
+  -- ["RRethy/nvim-treesitter-textsubjects"] = {
+  --   config = function()
+  --     require("nvim-treesitter.configs").setup()
+  --   end,
+  -- },
+  --
+  -- ["nvim-treesitter/nvim-treesitter-textobjects"] = {
+  --   config = function()
+  --     require("nvim-treesitter.configs").setup()
+  --   end,
+  -- },
+
   -- lf file manager
   -- ["nvim-lua/plenary.nvim"] = {},
   -- ["akinsho/toggleterm.nvim"] = {

@@ -10,8 +10,9 @@ local sources = {
 
   -- webdev stuff
   b.formatting.deno_fmt,
+  b.code_actions.eslint_d,
   b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
-  b.diagnostics.jshint,
+  -- b.diagnostics.jshint,
 
   -- json
   b.diagnostics.jsonlint,
@@ -28,6 +29,14 @@ local sources = {
   b.formatting.clang_format,
   b.formatting.rustfmt,
 
+  -- python
+  -- b.code_actions.refactoring,
+  -- b.diagnostics.flake8,
+  b.formatting.autopep8,
+  -- b.formatting.black,
+  b.formatting.isort,
+  -- b.formatting.yapf,
+
   -- golang
   b.formatting.goimports,
   b.formatting.gofumpt,
@@ -36,8 +45,17 @@ local sources = {
   -- b.diagnostics.staticcheck,
   -- b.diagnostics.revive,
 
+  -- php
+  b.diagnostics.php,
+  b.diagnostics.phpcs,
+  b.diagnostics.phpstan,
+  b.diagnostics.psalm,
+  b.formatting.phpcbf,
+  b.formatting.phpcsfixer,
+
   -- writting
   b.diagnostics.write_good,
+  b.diagnostics.editorconfig_checker,
 }
 
 local async_formatting = function(bufnr)
