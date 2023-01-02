@@ -40,7 +40,7 @@ local sources = {
   -- golang
   b.formatting.goimports,
   b.formatting.gofumpt,
-  b.formatting.golines,
+  -- b.formatting.golines,
   b.diagnostics.golangci_lint,
   -- b.diagnostics.staticcheck,
   -- b.diagnostics.revive,
