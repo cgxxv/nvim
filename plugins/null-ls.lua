@@ -7,12 +7,15 @@ end
 local b = null_ls.builtins
 
 local sources = {
-
   -- webdev stuff
   -- b.formatting.deno_fmt,
   b.code_actions.eslint_d,
-  b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
-  -- b.diagnostics.jshint,
+  b.diagnostics.eslint_d,
+  b.diagnostics.jshint,
+  -- b.formatting.eslint_d,
+  -- b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
+  b.formatting.prettier_eslint,
+  b.formatting.prettierd,
 
   -- json
   b.diagnostics.jsonlint,
@@ -43,7 +46,7 @@ local sources = {
   -- b.formatting.golines,
   b.diagnostics.golangci_lint,
   -- b.diagnostics.staticcheck,
-  -- b.diagnostics.revive,
+  b.diagnostics.revive,
 
   -- php
   b.diagnostics.php,
@@ -53,9 +56,16 @@ local sources = {
   b.formatting.phpcbf,
   b.formatting.phpcsfixer,
 
-  -- writting
+  -- writing
   b.diagnostics.write_good,
   b.diagnostics.editorconfig_checker,
+  b.diagnostics.todo_comments,
+  b.diagnostics.dotenv_linter,
+  b.diagnostics.trail_space,
+  b.diagnostics.misspell,
+
+  b.hover.dictionary,
+  b.hover.printenv,
 }
 
 local async_formatting = function(bufnr)

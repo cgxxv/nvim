@@ -63,6 +63,8 @@ return {
   ["m-demare/hlargs.nvim"] = {
     config = function()
       require("hlargs").setup()
+      -- TODO: should double check
+      -- require "nvim-treesitter/nvim-treesitter"
     end,
   },
 
@@ -135,6 +137,32 @@ return {
   ["simrat39/symbols-outline.nvim"] = {
     config = function()
       require("symbols-outline").setup()
+    end,
+  },
+
+  ["folke/todo-comments.nvim"] = {
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
+    end,
+  },
+
+  ["numToStr/Comment.nvim"] = {
+    config = function()
+      require("Comment").setup {
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+      }
+    end,
+  },
+
+  ["JoosepAlviste/nvim-ts-context-commentstring"] = {
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
+      }
     end,
   },
 
