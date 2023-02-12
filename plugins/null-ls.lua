@@ -46,7 +46,8 @@ local sources = {
   -- b.formatting.golines,
   b.diagnostics.golangci_lint,
   -- b.diagnostics.staticcheck,
-  b.diagnostics.revive,
+  -- b.diagnostics.revive,
+  b.code_actions.gomodifytags,
 
   -- php
   b.diagnostics.php,
@@ -56,13 +57,18 @@ local sources = {
   b.formatting.phpcbf,
   b.formatting.phpcsfixer,
 
+  -- toml
+  b.formatting.taplo,
+
   -- writing
   b.diagnostics.write_good,
   b.diagnostics.editorconfig_checker,
   b.diagnostics.todo_comments,
   b.diagnostics.dotenv_linter,
   b.diagnostics.trail_space,
-  b.diagnostics.misspell,
+  -- b.diagnostics.misspell,
+  b.diagnostics.codespell,
+  -- b.formatting.codespell,
 
   b.hover.dictionary,
   b.hover.printenv,
