@@ -8,6 +8,8 @@ local servers = {
   "html",
   "cssls",
   "tsserver",
+  "tailwindcss",
+  "svelte",
 
   -- backend dev
   "clangd",
@@ -16,11 +18,13 @@ local servers = {
   "rust_analyzer",
   "phpactor",
 
+  -- others
   "sqlls",
   "cmake",
   "dockerls",
   "awk_ls",
-  "yamlls",
+  "yamlls", -- for yaml files
+  "taplo", -- for toml files
 }
 
 for _, lsp in ipairs(servers) do

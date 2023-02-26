@@ -9,13 +9,18 @@ local b = null_ls.builtins
 local sources = {
   -- webdev stuff
   -- b.formatting.deno_fmt,
-  b.code_actions.eslint_d,
-  b.diagnostics.eslint_d,
-  b.diagnostics.jshint,
+  -- b.code_actions.eslint_d,
+  -- b.diagnostics.eslint_d,
   -- b.formatting.eslint_d,
+  b.code_actions.eslint,
+  b.diagnostics.eslint,
+  b.diagnostics.jshint,
   -- b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
-  b.formatting.prettier_eslint,
-  b.formatting.prettierd,
+  -- b.formatting.prettier_eslint,
+  -- b.formatting.prettierd,
+  b.formatting.prettier,
+  b.diagnostics.stylelint,
+  b.formatting.stylelint,
 
   -- json
   b.diagnostics.jsonlint,

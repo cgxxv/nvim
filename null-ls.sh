@@ -2,9 +2,14 @@
 
 sudo port install -y shellcheck
 
-npm i -g tree-sitter eslint eslint_d jshint prettier prettier-eslint-cli @fsouza/prettierd prettier_d_slim write-good
+npm i -g tree-sitter eslint eslint_d jshint prettier prettier-eslint-cli @fsouza/prettierd prettier_d_slim
+npm i -g write-good
+npm i -g @tailwindcss/language-server
+npm i -g yaml-language-server
+npm i -g svelte-language-server
 
-cargo install stylua dotenv-linter taplo-cli
+cargo install stylua dotenv-linter
+cargo install --features lsp --locked taplo-cli
 
 luarocks install luacheck
 
