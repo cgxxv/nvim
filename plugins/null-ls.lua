@@ -6,6 +6,15 @@ end
 
 local b = null_ls.builtins
 
+-- NOTE: a stupid solution
+table.insert(b.formatting.prettierd.filetypes, vim.bo.filetype)
+table.insert(b.code_actions.eslint_d.filetypes, "svelte")
+table.insert(b.diagnostics.eslint_d.filetypes, "svelte")
+table.insert(b.code_actions.eslint.filetypes, "svelte")
+table.insert(b.diagnostics.eslint.filetypes, "svelte")
+
+-- print(table.concat(b.diagnostics.eslint_d.filetypes, " | "))
+
 local sources = {
   -- webdev stuff
   -- b.formatting.deno_fmt,
@@ -14,13 +23,13 @@ local sources = {
   -- b.formatting.eslint_d,
   b.code_actions.eslint,
   b.diagnostics.eslint,
-  b.diagnostics.jshint,
+  -- b.diagnostics.jshint,
   -- b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
-  -- b.formatting.prettier_eslint,
-  -- b.formatting.prettierd,
-  b.formatting.prettier,
+  -- b.formatting.prettier,
+  b.formatting.prettierd,
   b.diagnostics.stylelint,
   b.formatting.stylelint,
+  -- b.formatting.rustywind,
 
   -- json
   b.diagnostics.jsonlint,
@@ -33,9 +42,15 @@ local sources = {
   b.formatting.shfmt,
   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
 
+  -- fish
+  b.diagnostics.fish,
+
   -- cpp
   b.formatting.clang_format,
   b.formatting.rustfmt,
+  b.diagnostics.cppcheck,
+  -- b.diagnostics.cpplint,
+  -- b.diagnostics.clang_check,
 
   -- python
   -- b.code_actions.refactoring,
@@ -75,6 +90,10 @@ local sources = {
   b.diagnostics.codespell,
   -- b.formatting.codespell,
 
+  -- tools
+  b.diagnostics.checkmake,
+  b.diagnostics.cmake_lint,
+
   b.hover.dictionary,
   b.hover.printenv,
 }
@@ -110,6 +129,10 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup {
   debug = true,
   sources = sources,
+  -- diagnostics_format = "[#{c}] #{m} (#{s})",
+  -- on_attach = function()
+  --   vim.lsp.buf.format { async = true }
+  -- end,
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then
       vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }

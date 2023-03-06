@@ -1,30 +1,15 @@
 local overrides = require "custom.plugins.overrides"
 
 return {
+  -- ["christoomey/vim-tmux-navigator"] = {},
+  ["szw/vim-maximizer"] = {},
 
-  -- ["goolord/alpha-nvim"] = { disable = false }, -- enables dashboard
-
-  -- Override plugin definition options
-  ["neovim/nvim-lspconfig"] = {
+  ["williamboman/mason-lspconfig.nvim"] = {
+    after = "williamboman/mason.nvim",
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.plugins.lspconfig"
-    end,
-  },
-
-  ["williamboman/mason.nvim"] = {
-    override_options = overrides.mason,
-  },
-
-  ["kyazdani42/nvim-tree.lua"] = {
-    override_options = overrides.nvimtree,
-  },
-
-  -- Install a plugin
-  ["max397574/better-escape.nvim"] = {
-    event = "InsertEnter",
-    config = function()
-      require("better_escape").setup()
+      require("mason-lspconfig").setup {
+        automatic_installation = true,
+      }
     end,
   },
 
@@ -36,29 +21,82 @@ return {
     end,
   },
 
-  -- ["nvim-lualine/lualine.nvim"] = {
-  --   requires = { "kyazdani42/nvim-web-devicons", opt = true },
-  --   config = function()
-  --     require("lualine").setup {
-  --       sections = {
-  --         lualine_a = {
-  --           "buffers",
-  --           show_filename_only = false,
-  --           buffers_color = {
-  --             -- Same values as the general color option can be used here.
-  --             active = "lualine_{section}_normal", -- Color for active buffer.
-  --             inactive = "lualine_{section}_inactive", -- Color for inactive buffer.
-  --           },
-  --           symbols = {
-  --             modified = " ●", -- Text to show when the buffer is modified
-  --             alternate_file = "#", -- Text to show to identify the alternate file
-  --             directory = "", -- Text to show when the buffer is a directory
-  --           },
-  --         },
-  --       },
-  --     }
-  --   end,
+  ["jayp0521/mason-null-ls.nvim"] = {
+    after = { "mason.nvim", "null-ls.nvim" },
+    config = function()
+      require("mason-null-ls").setup {
+        automatic_installation = true,
+      }
+    end,
+  },
+
+  -- Override plugin definition options
+  ["neovim/nvim-lspconfig"] = {
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.plugins.lspconfig"
+    end,
+  },
+
+  ["glepnir/lspsaga.nvim"] = {
+    after = { "nvim-web-devicons", "nvim-treesitter" },
+    config = function()
+      require("lspsaga").setup {
+        -- keybinds for navigation in lspsaga window
+        scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
+        -- use enter to open file with definition preview
+        definition = {
+          edit = "<CR>",
+        },
+        ui = {
+          colors = {
+            normal_bg = "#022746",
+          },
+        },
+      }
+    end,
+  },
+  ["jose-elias-alvarez/typescript.nvim"] = {},
+  ["onsails/lspkind.nvim"] = {},
+
+  ["williamboman/mason.nvim"] = {
+    override_options = overrides.mason,
+  },
+
+  -- ["kyazdani42/nvim-tree.lua"] = {
+  --   override_options = overrides.nvimtree,
   -- },
+
+  ["nvim-telescope/telescope.nvim"] = {
+    config = function()
+      -- import telescope actions safely
+      local present, actions = pcall(require, "telescope.actions")
+      if not present then
+        return
+      end
+
+      -- configure custom mappings
+      return {
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+              ["<C-j>"] = actions.move_selection_next, -- move to next result
+              ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
+            },
+          },
+        },
+      }
+    end,
+  },
+
+  -- Install a plugin
+  ["max397574/better-escape.nvim"] = {
+    event = "InsertEnter",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
 
   ["m-demare/hlargs.nvim"] = {
     config = function()
@@ -68,28 +106,17 @@ return {
     end,
   },
 
-  -- ["RRethy/nvim-treesitter-textsubjects"] = {
-  --   config = function()
-  --     require("nvim-treesitter.configs").setup()
-  --   end,
-  -- },
-  --
-  -- ["nvim-treesitter/nvim-treesitter-textobjects"] = {
-  --   config = function()
-  --     require("nvim-treesitter.configs").setup()
-  --   end,
-  -- },
-
   -- lf file manager
-  ["nvim-lua/plenary.nvim"] = {},
   ["akinsho/toggleterm.nvim"] = {
-    tag = "*",
     config = function()
       require("toggleterm").setup()
     end,
   },
   ["lmburns/lf.nvim"] = {
+    after = { "plenary.nvim", "toggleterm.nvim" },
     config = function()
+      -- requires { "plenary.nvim", "toggleterm.nvim" }
+
       -- This feature will not work if the plugin is lazy-loaded
       vim.g.lf_netrw = 1
 
@@ -104,33 +131,14 @@ return {
         -- highlights = { NormalFloat = { guibg = "NONE" }, FloatBorder = { guifg = "NONE" } },
         winblend = 0,
       }
-
       vim.keymap.set("n", "<Leader>2f", ":Lf<CR>")
     end,
-    requires = { "plenary.nvim", "toggleterm.nvim" },
   },
 
-  -- FIXME: will lead to nvchad.ui.icons not found error
-  -- ["ibhagwan/fzf-lua"] = {
-  --   -- optional for icon support
-  --   -- requires = { "nvim-tree/nvim-web-devicons" },
-  --   config = function()
-  --     require("fzf-lua").setup {
-  --       winopts = {
-  --         hl = { border = "FloatBorder" },
-  --       },
-  --     }
-  --   end,
-  -- },
   ["rcarriga/nvim-notify"] = {},
   ["dnlhc/glance.nvim"] = {
     config = function()
       require("glance").setup()
-    end,
-  },
-  ["lewis6991/gitsigns.nvim"] = {
-    config = function()
-      require("gitsigns").setup()
     end,
   },
 
@@ -141,17 +149,9 @@ return {
   },
 
   ["folke/todo-comments.nvim"] = {
-    requires = "nvim-lua/plenary.nvim",
+    after = "plenary.nvim",
     config = function()
       require("todo-comments").setup {}
-    end,
-  },
-
-  ["numToStr/Comment.nvim"] = {
-    config = function()
-      require("Comment").setup {
-        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-      }
     end,
   },
 
@@ -166,76 +166,11 @@ return {
     end,
   },
 
-  -- FIXME: will lead to nvchad.ui.icons error
-  -- ["ldelossa/nvim-ide"] = {
-  --   config = function()
-  --     -- default components
-  --     local bufferlist = require "ide.components.bufferlist"
-  --     local explorer = require "ide.components.explorer"
-  --     local outline = require "ide.components.outline"
-  --     local callhierarchy = require "ide.components.callhierarchy"
-  --     local timeline = require "ide.components.timeline"
-  --     local terminal = require "ide.components.terminal"
-  --     local terminalbrowser = require "ide.components.terminal.terminalbrowser"
-  --     local changes = require "ide.components.changes"
-  --     local commits = require "ide.components.commits"
-  --     local branches = require "ide.components.branches"
-  --     local bookmarks = require "ide.components.bookmarks"
-  --
-  --     require("ide").setup {
-  --       -- The global icon set to use.
-  --       -- values: "nerd", "codicon", "default"
-  --       icon_set = "default",
-  --       -- Component specific configurations and default config overrides.
-  --       components = {
-  --         -- The global keymap is applied to all Components before construction.
-  --         -- It allows common keymaps such as "hide" to be overriden, without having
-  --         -- to make an override entry for all Components.
-  --         --
-  --         -- If a more specific keymap override is defined for a specific Component
-  --         -- this takes precedence.
-  --         global_keymaps = {
-  --           -- example, change all Component's hide keymap to "h"
-  --           -- hide = h
-  --         },
-  --         -- example, prefer "x" for hide only for Explorer component.
-  --         -- Explorer = {
-  --         --     keymaps = {
-  --         --         hide = "x",
-  --         --     }
-  --         -- }
-  --       },
-  --       -- default panel groups to display on left and right.
-  --       panels = {
-  --         left = "explorer",
-  --         right = "git",
-  --       },
-  --       -- panels defined by groups of components, user is free to redefine the defaults
-  --       -- and/or add additional.
-  --       panel_groups = {
-  --         explorer = {
-  --           outline.Name,
-  --           bufferlist.Name,
-  --           explorer.Name,
-  --           bookmarks.Name,
-  --           callhierarchy.Name,
-  --           terminalbrowser.Name,
-  --         },
-  --         terminal = { terminal.Name },
-  --         git = { changes.Name, commits.Name, timeline.Name, branches.Name },
-  --       },
-  --       -- workspaces config
-  --       workspaces = {
-  --         -- which panels to open by default, one of: 'left', 'right', 'both', 'none'
-  --         auto_open = "left",
-  --       },
-  --       -- default panel sizes for the different positions
-  --       panel_sizes = {
-  --         left = 30,
-  --         right = 30,
-  --         bottom = 15,
-  --       },
-  --     }
-  --   end,
-  -- },
+  ["gpanders/editorconfig.nvim"] = {},
+
+  -- add, delete, change surroundings
+  ["tpope/vim-surround"] = {},
+
+  -- replace with register contents using motion (gr + motion)
+  ["inkarkat/vim-ReplaceWithRegister"] = {},
 }

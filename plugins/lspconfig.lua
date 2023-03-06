@@ -10,6 +10,7 @@ local servers = {
   "tsserver",
   "tailwindcss",
   "svelte",
+  "emmet_ls",
 
   -- backend dev
   "clangd",
@@ -28,8 +29,12 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  local opt = {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = capabilities
   }
+  if lsp == "emmet_ls" then
+    opt["filetypes"] = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" }
+  end
+  lspconfig[lsp].setup(opt)
 end
