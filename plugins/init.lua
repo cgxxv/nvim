@@ -58,10 +58,10 @@ return {
       }
     end,
     requires = {
-      {"nvim-tree/nvim-web-devicons"},
+      { "nvim-tree/nvim-web-devicons" },
       --Please make sure you install markdown and markdown_inline parser
-      {"nvim-treesitter/nvim-treesitter"}
-    }
+      { "nvim-treesitter/nvim-treesitter" },
+    },
   },
   -- TODO: need this?
   ["jose-elias-alvarez/typescript.nvim"] = {},
@@ -77,10 +77,10 @@ return {
 
   ["nvim-telescope/telescope.nvim"] = {
     branch = "0.1.x",
-    requires = { {'nvim-lua/plenary.nvim'} },
-    config = function()
+    override_options = function()
+      local actions = require "telescope.actions"
       -- configure custom mappings
-      require("telescope.actions").setup {
+      return {
         defaults = {
           mappings = {
             i = {
@@ -103,10 +103,9 @@ return {
   },
 
   ["m-demare/hlargs.nvim"] = {
+    requires = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("hlargs").setup()
-      -- TODO: should double check
-      -- require "nvim-treesitter/nvim-treesitter"
     end,
   },
 
@@ -117,10 +116,8 @@ return {
     end,
   },
   ["lmburns/lf.nvim"] = {
-    requires = {"plenary.nvim", "toggleterm.nvim"},
+    requires = { "plenary.nvim", "toggleterm.nvim" },
     config = function()
-      -- requires { "plenary.nvim", "toggleterm.nvim" }
-
       -- This feature will not work if the plugin is lazy-loaded
       vim.g.lf_netrw = 1
 
@@ -139,7 +136,13 @@ return {
     end,
   },
 
-  ["rcarriga/nvim-notify"] = {},
+  ["rcarriga/nvim-notify"] = {
+    config = function()
+      require("notify").setup {
+        background_colour = "#40513B",
+      }
+    end,
+  },
   ["dnlhc/glance.nvim"] = {
     config = function()
       require("glance").setup()
