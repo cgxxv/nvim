@@ -20,22 +20,20 @@ M.general = {
 
 -- more keybinds!
 
-local opts = { noremap = true, silent = true, buffer = bufnr }
-
 M.lspconfig = {
   n = {
-    ["gf"] = {"<cmd>Lspsaga lsp_finder<CR>", opts, "show definition, references"},
-    ["gd"] = {"<cmd>Lspsaga peek_definition<CR>", opts, "see definition and make edits in window"},
-    ["<leader>rn"] = {"<cmd>Lspsaga rename<CR>", opts, "smart rename"},
-    ["<leader>d"] = {"<cmd>Lspsaga show_cursor_diagnostics<CR>", opts, "show diagnostics for cursor"},
+    ["gf"] = {"<cmd>Lspsaga lsp_finder<CR>", "show definition, references"},
+    ["gd"] = {"<cmd>Lspsaga peek_definition<CR>", "see definition and make edits in window"},
+    ["<leader>rn"] = {"<cmd>Lspsaga rename<CR>", "smart rename"},
+    ["<leader>d"] = {"<cmd>Lspsaga show_cursor_diagnostics<CR>", "show diagnostics for cursor"},
     ["gr"] = {},
-    ["<leader>gr"] = {"<cmd>lua vim.lsp.buf.references()<CR>", opts, "lsp references"},
+    ["<leader>gr"] = {"<cmd>lua vim.lsp.buf.references()<CR>", "lsp references"},
     -- the below will override the default keybind
-    ["<leader>D"] = {"<cmd>Lspsaga show_line_diagnostics<CR>", opts, "show diagnostics for line"},
-    ["[d"] = {"<cmd>Lspsaga diagnostic_jump_prev<CR>", opts, "jump to previous diagnostics in buffer"},
-    ["]d"] = {"<cmd>Lspsaga diagnostic_jump_next<CR>", opts, "jump to next diagnostics in buffer"},
-    ["K"] = {"<cmd>Lspsaga hover_doc<CR>", opts, "show documentation for what is under cursor"},
-    ["<leader>o"] = {"<cmd>LSoutlineToggle<CR>", opts, "see outline on right hand side"},
+    ["<leader>D"] = {"<cmd>Lspsaga show_line_diagnostics<CR>", "show diagnostics for line"},
+    ["[d"] = {"<cmd>Lspsaga diagnostic_jump_prev<CR>", "jump to previous diagnostics in buffer"},
+    ["]d"] = {"<cmd>Lspsaga diagnostic_jump_next<CR>", "jump to next diagnostics in buffer"},
+    ["K"] = {"<cmd>Lspsaga hover_doc<CR>", "show documentation for what is under cursor"},
+    ["<leader>o"] = {"<cmd>LSoutlineToggle<CR>", "see outline on right hand side"},
 
     -- typescript specific keymaps (e.g. rename file and update imports)
     ["<leader>rf"] = {":TypescriptRenameFile<CR>", "rename file and update imports"},

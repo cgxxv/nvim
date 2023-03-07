@@ -6,14 +6,12 @@ end
 
 local b = null_ls.builtins
 
--- NOTE: a stupid solution
+-- NOTE/FIXME: a stupid solution
 table.insert(b.formatting.prettierd.filetypes, vim.bo.filetype)
 table.insert(b.code_actions.eslint_d.filetypes, "svelte")
 table.insert(b.diagnostics.eslint_d.filetypes, "svelte")
 table.insert(b.code_actions.eslint.filetypes, "svelte")
 table.insert(b.diagnostics.eslint.filetypes, "svelte")
-
--- print(table.concat(b.diagnostics.eslint_d.filetypes, " | "))
 
 local sources = {
   -- webdev stuff
@@ -96,6 +94,9 @@ local sources = {
 
   b.hover.dictionary,
   b.hover.printenv,
+
+  -- b.code_actions.gitsigns,
+  b.diagnostics.gitlint,
 }
 
 local async_formatting = function(bufnr)
@@ -129,10 +130,6 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup {
   debug = true,
   sources = sources,
-  -- diagnostics_format = "[#{c}] #{m} (#{s})",
-  -- on_attach = function()
-  --   vim.lsp.buf.format { async = true }
-  -- end,
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then
       vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
@@ -140,7 +137,14 @@ null_ls.setup {
         group = augroup,
         buffer = bufnr,
         callback = function()
-          async_formatting(bufnr)
+          -- async_formatting(bufnr)
+          vim.lsp.buf.format {
+            filter = function(client2)
+              --  only use null-ls for formatting instead of lsp server
+              return client2.name == "null-ls"
+            end,
+            bufnr = bufnr,
+          }
         end,
       })
     end

@@ -1,32 +1,34 @@
 local overrides = require "custom.plugins.overrides"
 
 return {
-  -- ["christoomey/vim-tmux-navigator"] = {},
+  ["christoomey/vim-tmux-navigator"] = {},
   ["szw/vim-maximizer"] = {},
 
-  ["williamboman/mason-lspconfig.nvim"] = {
-    after = "williamboman/mason.nvim",
-    config = function()
-      require("mason-lspconfig").setup {
-        automatic_installation = true,
-      }
-    end,
+  -- ["williamboman/mason-lspconfig.nvim"] = {
+  --   after = "mason.nvim",
+  --   config = function()
+  --     require("mason-lspconfig").setup {
+  --       ensure_installed = overrides.mason.ensure_installed,
+  --       automatic_installation = true,
+  --     }
+  --   end,
+  -- },
+
+  ["nvim-treesitter/nvim-treesitter"] = {
+    override_options = overrides.treesitter,
   },
 
   -- code formatting, linting etc
   ["jose-elias-alvarez/null-ls.nvim"] = {
-    after = "nvim-lspconfig",
     config = function()
       require "custom.plugins.null-ls"
     end,
   },
 
   ["jayp0521/mason-null-ls.nvim"] = {
-    after = { "mason.nvim", "null-ls.nvim" },
+    after = "mason.nvim",
     config = function()
-      require("mason-null-ls").setup {
-        automatic_installation = true,
-      }
+      require "custom.plugins.mason-null-ls"
     end,
   },
 
@@ -39,7 +41,7 @@ return {
   },
 
   ["glepnir/lspsaga.nvim"] = {
-    after = { "nvim-web-devicons", "nvim-treesitter" },
+    branch = "main",
     config = function()
       require("lspsaga").setup {
         -- keybinds for navigation in lspsaga window
@@ -55,7 +57,13 @@ return {
         },
       }
     end,
+    requires = {
+      {"nvim-tree/nvim-web-devicons"},
+      --Please make sure you install markdown and markdown_inline parser
+      {"nvim-treesitter/nvim-treesitter"}
+    }
   },
+  -- TODO: need this?
   ["jose-elias-alvarez/typescript.nvim"] = {},
   ["onsails/lspkind.nvim"] = {},
 
@@ -68,15 +76,11 @@ return {
   -- },
 
   ["nvim-telescope/telescope.nvim"] = {
+    branch = "0.1.x",
+    requires = { {'nvim-lua/plenary.nvim'} },
     config = function()
-      -- import telescope actions safely
-      local present, actions = pcall(require, "telescope.actions")
-      if not present then
-        return
-      end
-
       -- configure custom mappings
-      return {
+      require("telescope.actions").setup {
         defaults = {
           mappings = {
             i = {
@@ -113,7 +117,7 @@ return {
     end,
   },
   ["lmburns/lf.nvim"] = {
-    after = { "plenary.nvim", "toggleterm.nvim" },
+    requires = {"plenary.nvim", "toggleterm.nvim"},
     config = function()
       -- requires { "plenary.nvim", "toggleterm.nvim" }
 
@@ -149,7 +153,7 @@ return {
   },
 
   ["folke/todo-comments.nvim"] = {
-    after = "plenary.nvim",
+    requires = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup {}
     end,
@@ -166,7 +170,7 @@ return {
     end,
   },
 
-  ["gpanders/editorconfig.nvim"] = {},
+  -- ["gpanders/editorconfig.nvim"] = {},
 
   -- add, delete, change surroundings
   ["tpope/vim-surround"] = {},

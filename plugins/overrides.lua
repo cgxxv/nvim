@@ -4,11 +4,40 @@ M.treesitter = {
   ensure_installed = {
     "vim",
     "lua",
+
+    "json",
+    "javascript",
+    "typescript",
+    "tsx",
+    "yaml",
+    "scss",
     "html",
     "css",
-    "tsserver",
+    "svelte",
+
+    "bash",
     "c",
+    "cpp",
+    "go",
+    "rust",
+    "python",
+    "sql",
+    "php",
+
+    "make",
+    "cmake",
+
+    "markdown",
+    "markdown_inline",
+
+    "regex",
+
+    "graphql",
+    "dockerfile",
+    "gitignore",
   },
+  autotag = { enable = true },
+  auto_install = true,
 }
 
 M.mason = {
