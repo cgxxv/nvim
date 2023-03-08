@@ -4,24 +4,21 @@ return {
   ["christoomey/vim-tmux-navigator"] = {},
   ["szw/vim-maximizer"] = {},
 
-  -- ["williamboman/mason-lspconfig.nvim"] = {
-  --   after = "mason.nvim",
-  --   config = function()
-  --     require("mason-lspconfig").setup {
-  --       ensure_installed = overrides.mason.ensure_installed,
-  --       automatic_installation = true,
-  --     }
-  --   end,
-  -- },
-
   ["nvim-treesitter/nvim-treesitter"] = {
     override_options = overrides.treesitter,
   },
 
-  -- code formatting, linting etc
-  ["jose-elias-alvarez/null-ls.nvim"] = {
+  ["williamboman/mason-lspconfig.nvim"] = {
+    after = "mason.nvim",
     config = function()
-      require "custom.plugins.null-ls"
+      require("custom.plugins.mason-lsp").setup()
+    end,
+  },
+
+  ["neovim/nvim-lspconfig"] = {
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.plugins.lspconfig"
     end,
   },
 
@@ -32,12 +29,19 @@ return {
     end,
   },
 
-  -- Override plugin definition options
-  ["neovim/nvim-lspconfig"] = {
+  -- code formatting, linting etc
+  ["jose-elias-alvarez/null-ls.nvim"] = {
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.plugins.lspconfig"
+      require "custom.plugins.null-ls"
     end,
+  },
+
+  ["fatih/vim-go"] = {},
+  ["ThePrimeagen/refactoring.nvim"] = {
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-treesitter/nvim-treesitter" },
+    },
   },
 
   ["glepnir/lspsaga.nvim"] = {
@@ -64,7 +68,18 @@ return {
     },
   },
   -- TODO: need this?
-  ["jose-elias-alvarez/typescript.nvim"] = {},
+  -- ["jose-elias-alvarez/typescript.nvim"] = {
+  --   config = function()
+  --     local on_attach = require("plugins.configs.lspconfig").on_attach
+  --     local capabilities = require("plugins.configs.lspconfig").capabilities
+  --     require("typescript").setup {
+  --       server = {
+  --         capabilities = capabilities,
+  --         on_attach = on_attach,
+  --       },
+  --     }
+  --   end,
+  -- },
   ["onsails/lspkind.nvim"] = {},
 
   ["williamboman/mason.nvim"] = {
@@ -94,7 +109,6 @@ return {
     end,
   },
 
-  -- Install a plugin
   ["max397574/better-escape.nvim"] = {
     event = "InsertEnter",
     config = function()
@@ -139,7 +153,7 @@ return {
   ["rcarriga/nvim-notify"] = {
     config = function()
       require("notify").setup {
-        background_colour = "#40513B",
+        background_colour = "#3A1078",
       }
     end,
   },

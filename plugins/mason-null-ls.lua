@@ -1,10 +1,10 @@
--- import mason-null-ls plugin safely
 local present, mason_null_ls = pcall(require, "mason-null-ls")
 if not present then
+  require("core.d").dump("FUCK mason-null-ls is not loaded")
   return
 end
 
-local opts = {
+local options = {
   ensure_installed = {
     "stylua",
     "luacheck",
@@ -24,22 +24,35 @@ local opts = {
     "cppcheck",
     "rustfmt",
 
-    "autopep8",
+    -- "autopep8",
     "isort",
+    "pylint",
+    "refactoring",
+    "flake8",
+    "black",
+    -- "yapf",
 
     "goimports",
+    -- "goimports_reviser", -- format imports
     "gofumpt",
-    "golangci_lint",
     "gomodifytags",
+    "golines",
+    "staticcheck",
+    -- "revive",
 
     "php",
-    "phpcs",
     "phpstan",
     "psalm",
     "phpcbf",
+    "phpcs",
     "phpcsfixer",
 
+    "sqlfluff",
+    "sql_formatter",
+
     "taplo",
+    "yamlfmt",
+    "yamllint",
 
     "write_good",
     "editorconfig_checker",
@@ -59,4 +72,4 @@ local opts = {
   -- automatic_setup = true,
 }
 
-mason_null_ls.setup(opts)
+mason_null_ls.setup(options)

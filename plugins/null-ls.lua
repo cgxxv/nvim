@@ -1,5 +1,4 @@
 local present, null_ls = pcall(require, "null-ls")
-
 if not present then
   return
 end
@@ -44,12 +43,10 @@ local sources = {
   -- b.diagnostics.clang_check,
 
   -- python
-  -- b.code_actions.refactoring,
-  -- b.diagnostics.flake8,
-  b.formatting.autopep8,
-  -- b.formatting.black,
+  b.code_actions.refactoring,
+  b.diagnostics.flake8,
+  b.formatting.black,
   b.formatting.isort,
-  -- b.formatting.yapf,
 
   -- golang
   b.formatting.goimports,
@@ -73,7 +70,7 @@ local sources = {
 
   -- writing
   b.diagnostics.write_good,
-  b.diagnostics.editorconfig_checker,
+  -- b.diagnostics.editorconfig_checker,
   b.diagnostics.todo_comments,
   b.diagnostics.dotenv_linter,
   b.diagnostics.trail_space,
