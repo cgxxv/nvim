@@ -8,12 +8,15 @@ local b = null_ls.builtins
 local sources = {
   -- webdev stuff
   -- b.formatting.deno_fmt,
-  b.code_actions.eslint_d,
-  b.diagnostics.eslint_d,
+  --
+  -- b.code_actions.eslint_d,
+  -- b.diagnostics.eslint_d,
   -- b.formatting.eslint_d,
   -- b.code_actions.eslint,
   -- b.diagnostics.eslint,
+  --
   -- b.diagnostics.jshint,
+  --
   -- b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
   -- b.formatting.prettier,
   b.formatting.prettierd,
@@ -52,8 +55,8 @@ local sources = {
   b.formatting.goimports,
   b.formatting.gofumpt,
   -- b.formatting.golines,
-  b.diagnostics.golangci_lint,
-  -- b.diagnostics.staticcheck,
+  -- b.diagnostics.golangci_lint,
+  b.diagnostics.staticcheck,
   -- b.diagnostics.revive,
   b.code_actions.gomodifytags,
 
@@ -90,11 +93,11 @@ local sources = {
 }
 
 -- NOTE/FIXME: a stupid solution
-table.insert(b.formatting.prettierd.filetypes, "svelte")
-table.insert(b.code_actions.eslint_d.filetypes, "svelte")
-table.insert(b.diagnostics.eslint_d.filetypes, "svelte")
--- table.insert(b.code_actions.eslint.filetypes, "svelte")
--- table.insert(b.diagnostics.eslint.filetypes, "svelte")
+table.insert(b.formatting.prettierd.filetypes, vim.bo.filetype)
+-- table.insert(b.code_actions.eslint_d.filetypes, vim.bo.filetype)
+-- table.insert(b.diagnostics.eslint_d.filetypes, vim.bo.filetype)
+table.insert(b.code_actions.eslint.filetypes, vim.bo.filetype)
+table.insert(b.diagnostics.eslint.filetypes, vim.bo.filetype)
 
 local async_formatting = function(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()

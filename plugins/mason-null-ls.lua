@@ -1,6 +1,5 @@
 local present, mason_null_ls = pcall(require, "mason-null-ls")
 if not present then
-  require("core.d").dump("FUCK mason-null-ls is not loaded")
   return
 end
 
@@ -9,7 +8,8 @@ local options = {
     "stylua",
     "luacheck",
 
-    "eslint_d",
+    -- "eslint_d",
+    -- "eslint",
     "prettierd",
     "stylelint",
     "jsonlint",

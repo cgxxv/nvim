@@ -61,4 +61,9 @@ M.nvimtree = {
   },
 }
 
+M.telescope = {
+  -- defaults = {},
+  extensions_list = { "refactoring" },
+}
+
 return M

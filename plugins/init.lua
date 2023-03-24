@@ -36,12 +36,42 @@ return {
     end,
   },
 
-  ["fatih/vim-go"] = {},
+  ["fatih/vim-go"] = {
+    config = function()
+      vim.g.go_addtags_transform = "camelcase"
+    end,
+  },
   ["ThePrimeagen/refactoring.nvim"] = {
     requires = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-treesitter/nvim-treesitter" },
     },
+    config = function()
+      require("refactoring").setup {
+        prompt_func_return_type = {
+          go = true,
+          java = false,
+
+          cpp = true,
+          c = true,
+          h = true,
+          hpp = true,
+          cxx = true,
+        },
+        prompt_func_param_type = {
+          go = true,
+          java = false,
+
+          cpp = true,
+          c = true,
+          h = true,
+          hpp = true,
+          cxx = true,
+        },
+        printf_statements = {},
+        print_var_statements = {},
+      }
+    end,
   },
 
   ["glepnir/lspsaga.nvim"] = {
@@ -57,6 +87,12 @@ return {
         ui = {
           colors = {
             normal_bg = "#022746",
+          },
+        },
+        extract_var_statements = {
+          go = "%s := %s // poggers",
+          cpp = {
+            'printf("a custom statement %%s %s", %s)',
           },
         },
       }
@@ -105,6 +141,7 @@ return {
             },
           },
         },
+        extensions_list = { "refactoring" },
       }
     end,
   },
