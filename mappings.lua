@@ -45,7 +45,7 @@ M.lspconfig = {
     ["gd"] = { "<cmd>Lspsaga peek_definition<CR>", "see definition and make edits in window" },
     ["<leader>rn"] = { "<cmd>Lspsaga rename<CR>", "smart rename" },
     ["<leader>d"] = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "show diagnostics for cursor" },
-    ["gr"] = {},
+    -- ["gr"] = {},
     ["<leader>gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "lsp references" },
     -- the below will override the default keybind
     ["<leader>D"] = { "<cmd>Lspsaga show_line_diagnostics<CR>", "show diagnostics for line" },

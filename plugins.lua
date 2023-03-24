@@ -1,50 +1,76 @@
-local overrides = require "custom.plugins.overrides"
+local overrides = require "custom.configs.overrides"
 
 return {
-  ["christoomey/vim-tmux-navigator"] = {},
-  ["szw/vim-maximizer"] = {},
+  {"christoomey/vim-tmux-navigator"},
 
-  ["nvim-treesitter/nvim-treesitter"] = {
-    override_options = overrides.treesitter,
-  },
+  {"szw/vim-maximizer"},
 
-  ["williamboman/mason-lspconfig.nvim"] = {
-    after = "mason.nvim",
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+    },
     config = function()
-      require("custom.plugins.mason-lsp").setup()
+      require("custom.configs.mason-lsp").setup()
     end,
   },
 
-  ["neovim/nvim-lspconfig"] = {
+  -- format & linting
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      require "custom.configs.null-ls"
+    end,
+  },
+
+  {"neovim/nvim-lspconfig",
+    dependencies = {
+      "jose-elias-alvarez/null-ls.nvim",
+    },
     config = function()
       require "plugins.configs.lspconfig"
-      require "custom.plugins.lspconfig"
+      require "custom.configs.lspconfig"
     end,
   },
 
-  ["jayp0521/mason-null-ls.nvim"] = {
-    after = "mason.nvim",
+  {
+    "williamboman/mason.nvim",
+    opts = overrides.mason,
+  },
+
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
     config = function()
-      require "custom.plugins.mason-null-ls"
+      require "custom.configs.mason-null-ls"
     end,
   },
 
-  -- code formatting, linting etc
-  ["jose-elias-alvarez/null-ls.nvim"] = {
-    config = function()
-      require "custom.plugins.null-ls"
-    end,
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = overrides.treesitter
   },
 
-  ["fatih/vim-go"] = {
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = overrides.nvimtree,
+  },
+
+  {
+    "fatih/vim-go",
     config = function()
       vim.g.go_addtags_transform = "camelcase"
     end,
   },
-  ["ThePrimeagen/refactoring.nvim"] = {
-    requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-treesitter/nvim-treesitter" },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
     config = function()
       require("refactoring").setup {
@@ -74,7 +100,8 @@ return {
     end,
   },
 
-  ["glepnir/lspsaga.nvim"] = {
+  {
+    "glepnir/lspsaga.nvim",
     branch = "main",
     config = function()
       require("lspsaga").setup {
@@ -97,10 +124,10 @@ return {
         },
       }
     end,
-    requires = {
-      { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
       --Please make sure you install markdown and markdown_inline parser
-      { "nvim-treesitter/nvim-treesitter" },
+      "nvim-treesitter/nvim-treesitter",
     },
   },
   -- TODO: need this?
@@ -116,19 +143,12 @@ return {
   --     }
   --   end,
   -- },
-  ["onsails/lspkind.nvim"] = {},
+  {"onsails/lspkind.nvim"},
 
-  ["williamboman/mason.nvim"] = {
-    override_options = overrides.mason,
-  },
-
-  -- ["kyazdani42/nvim-tree.lua"] = {
-  --   override_options = overrides.nvimtree,
-  -- },
-
-  ["nvim-telescope/telescope.nvim"] = {
+  {
+    "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
-    override_options = function()
+    opts = function()
       local actions = require "telescope.actions"
       -- configure custom mappings
       return {
@@ -146,28 +166,32 @@ return {
     end,
   },
 
-  ["max397574/better-escape.nvim"] = {
+  {
+    "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
       require("better_escape").setup()
     end,
   },
 
-  ["m-demare/hlargs.nvim"] = {
-    requires = { "nvim-treesitter/nvim-treesitter" },
+  {
+    "m-demare/hlargs.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("hlargs").setup()
     end,
   },
 
   -- lf file manager
-  ["akinsho/toggleterm.nvim"] = {
+  {
+    "akinsho/toggleterm.nvim",
     config = function()
       require("toggleterm").setup()
     end,
   },
-  ["lmburns/lf.nvim"] = {
-    requires = { "plenary.nvim", "toggleterm.nvim" },
+  {
+    "lmburns/lf.nvim",
+    dependencies = { "plenary.nvim", "toggleterm.nvim" },
     config = function()
       -- This feature will not work if the plugin is lazy-loaded
       vim.g.lf_netrw = 1
@@ -187,33 +211,38 @@ return {
     end,
   },
 
-  ["rcarriga/nvim-notify"] = {
+  {
+    "rcarriga/nvim-notify",
     config = function()
       require("notify").setup {
         background_colour = "#3A1078",
       }
     end,
   },
-  ["dnlhc/glance.nvim"] = {
+  {
+    "dnlhc/glance.nvim",
     config = function()
       require("glance").setup()
     end,
   },
 
-  ["simrat39/symbols-outline.nvim"] = {
+  {
+    "simrat39/symbols-outline.nvim",
     config = function()
       require("symbols-outline").setup()
     end,
   },
 
-  ["folke/todo-comments.nvim"] = {
-    requires = "nvim-lua/plenary.nvim",
+  {
+    "folke/todo-comments.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
     config = function()
       require("todo-comments").setup {}
     end,
   },
 
-  ["JoosepAlviste/nvim-ts-context-commentstring"] = {
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
     config = function()
       require("nvim-treesitter.configs").setup {
         context_commentstring = {
@@ -227,8 +256,8 @@ return {
   -- ["gpanders/editorconfig.nvim"] = {},
 
   -- add, delete, change surroundings
-  ["tpope/vim-surround"] = {},
+  {"tpope/vim-surround"},
 
   -- replace with register contents using motion (gr + motion)
-  ["inkarkat/vim-ReplaceWithRegister"] = {},
+  {"inkarkat/vim-ReplaceWithRegister"},
 }
