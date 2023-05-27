@@ -11,6 +11,8 @@ M.servers = {
   "emmet_ls",
   "jsonls",
   -- "jqls",
+  "svelte",
+  "tailwindcss",
 
   "yamlls",
   "pyright",

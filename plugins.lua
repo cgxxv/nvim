@@ -1,12 +1,18 @@
 local overrides = require "custom.configs.overrides"
 
 return {
-  {"christoomey/vim-tmux-navigator"},
+  { "christoomey/vim-tmux-navigator", lazy = false },
 
-  {"szw/vim-maximizer"},
+  { "szw/vim-maximizer", lazy = false },
+
+  {
+    "numToStr/Comment.nvim",
+    lazy = false,
+  },
 
   {
     "williamboman/mason-lspconfig.nvim",
+    -- lazy = false,
     dependencies = {
       "williamboman/mason.nvim",
     },
@@ -18,12 +24,15 @@ return {
   -- format & linting
   {
     "jose-elias-alvarez/null-ls.nvim",
+    -- lazy = false,
     config = function()
       require "custom.configs.null-ls"
     end,
   },
 
-  {"neovim/nvim-lspconfig",
+  {
+    "neovim/nvim-lspconfig",
+    -- lazy = false,
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
     },
@@ -33,13 +42,15 @@ return {
     end,
   },
 
-  {
-    "williamboman/mason.nvim",
-    opts = overrides.mason,
-  },
+  -- {
+  --   "williamboman/mason.nvim",
+  --   lazy = false,
+  --   -- opts = overrides.mason,
+  -- },
 
   {
     "jay-babu/mason-null-ls.nvim",
+    -- lazy = false,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
@@ -52,7 +63,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter
+    opts = overrides.treesitter,
   },
 
   {
@@ -102,6 +113,7 @@ return {
 
   {
     "glepnir/lspsaga.nvim",
+    lazy = false,
     branch = "main",
     config = function()
       require("lspsaga").setup {
@@ -143,7 +155,7 @@ return {
   --     }
   --   end,
   -- },
-  {"onsails/lspkind.nvim"},
+  { "onsails/lspkind.nvim" },
 
   {
     "nvim-telescope/telescope.nvim",
@@ -176,10 +188,16 @@ return {
 
   {
     "m-demare/hlargs.nvim",
+    lazy = false,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("hlargs").setup()
     end,
+  },
+
+  {
+    "nvim-lua/plenary.nvim",
+    lazy = false,
   },
 
   -- lf file manager
@@ -191,7 +209,8 @@ return {
   },
   {
     "lmburns/lf.nvim",
-    dependencies = { "plenary.nvim", "toggleterm.nvim" },
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim", "akinsho/toggleterm.nvim" },
     config = function()
       -- This feature will not work if the plugin is lazy-loaded
       vim.g.lf_netrw = 1
@@ -221,6 +240,7 @@ return {
   },
   {
     "dnlhc/glance.nvim",
+    -- lazy = false,
     config = function()
       require("glance").setup()
     end,
@@ -256,8 +276,8 @@ return {
   -- ["gpanders/editorconfig.nvim"] = {},
 
   -- add, delete, change surroundings
-  {"tpope/vim-surround"},
+  { "tpope/vim-surround" },
 
   -- replace with register contents using motion (gr + motion)
-  {"inkarkat/vim-ReplaceWithRegister"},
+  { "inkarkat/vim-ReplaceWithRegister" },
 }

@@ -5,23 +5,39 @@ end
 
 local b = null_ls.builtins
 
+local filetypes = {
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+  "css",
+  "scss",
+  "less",
+  "html",
+  "json",
+  "jsonc",
+  "yaml",
+  "markdown",
+  "markdown.mdx",
+  "graphql",
+  "handlebars",
+  "svelte",
+  "tmpl",
+}
+
 local sources = {
   -- webdev stuff
   -- b.formatting.deno_fmt,
   --
-  -- b.code_actions.eslint_d,
-  -- b.diagnostics.eslint_d,
-  -- b.formatting.eslint_d,
-  -- b.code_actions.eslint,
-  -- b.diagnostics.eslint,
+  -- b.code_actions.eslint.with { filetypes = filetypes },
+  -- b.diagnostics.eslint.with { filetypes = filetypes },
+  -- b.formatting.eslint,
   --
   -- b.diagnostics.jshint,
   --
-  -- b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
+  -- b.formatting.prettier.with,
   -- b.formatting.prettier,
-  b.formatting.prettierd,
-  b.diagnostics.stylelint,
-  b.formatting.stylelint,
+  b.formatting.prettierd.with { filetypes = filetypes },
   -- b.formatting.rustywind,
 
   -- json
@@ -36,17 +52,15 @@ local sources = {
   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
 
   -- fish
-  b.diagnostics.fish,
+  -- b.diagnostics.fish,
 
   -- cpp
   b.formatting.clang_format,
   b.formatting.rustfmt,
-  b.diagnostics.cppcheck,
   -- b.diagnostics.cpplint,
   -- b.diagnostics.clang_check,
 
   -- python
-  b.code_actions.refactoring,
   b.diagnostics.flake8,
   b.formatting.black,
   b.formatting.isort,
@@ -61,7 +75,6 @@ local sources = {
   b.code_actions.gomodifytags,
 
   -- php
-  b.diagnostics.php,
   b.diagnostics.phpcs,
   b.diagnostics.phpstan,
   b.diagnostics.psalm,
@@ -74,9 +87,6 @@ local sources = {
   -- writing
   b.diagnostics.write_good,
   -- b.diagnostics.editorconfig_checker,
-  b.diagnostics.todo_comments,
-  b.diagnostics.dotenv_linter,
-  b.diagnostics.trail_space,
   -- b.diagnostics.misspell,
   b.diagnostics.codespell,
   -- b.formatting.codespell,
@@ -85,19 +95,16 @@ local sources = {
   b.diagnostics.checkmake,
   b.diagnostics.cmake_lint,
 
-  b.hover.dictionary,
-  b.hover.printenv,
-
   -- b.code_actions.gitsigns,
   b.diagnostics.gitlint,
 }
 
 -- NOTE/FIXME: a stupid solution
-table.insert(b.formatting.prettierd.filetypes, vim.bo.filetype)
+-- table.insert(b.formatting.prettierd.filetypes, vim.bo.filetype)
 -- table.insert(b.code_actions.eslint_d.filetypes, vim.bo.filetype)
 -- table.insert(b.diagnostics.eslint_d.filetypes, vim.bo.filetype)
-table.insert(b.code_actions.eslint.filetypes, vim.bo.filetype)
-table.insert(b.diagnostics.eslint.filetypes, vim.bo.filetype)
+-- table.insert(b.code_actions.eslint.filetypes, vim.bo.filetype)
+-- table.insert(b.diagnostics.eslint.filetypes, vim.bo.filetype)
 
 local async_formatting = function(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
@@ -128,25 +135,28 @@ end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup {
-  debug = true,
+  -- debug = true,
   sources = sources,
-  on_attach = function(client, bufnr)
-    if client.supports_method "textDocument/formatting" then
-      vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-      vim.api.nvim_create_autocmd("BufWritePost", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          -- async_formatting(bufnr)
-          vim.lsp.buf.format {
-            filter = function(client2)
-              --  only use null-ls for formatting instead of lsp server
-              return client2.name == "null-ls"
-            end,
-            bufnr = bufnr,
-          }
-        end,
-      })
-    end
-  end,
+  -- on_attach = function(client, bufnr)
+  --   -- async_formatting(bufnr)
+  --   if client.supports_method "textDocument/formatting" then
+  --     vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+  --     vim.api.nvim_create_autocmd("BufWritePost", {
+  --       group = augroup,
+  --       buffer = bufnr,
+  --       callback = function()
+  --         -- async_formatting(bufnr)
+  --         vim.lsp.buf.format {
+  --           filter = function(client2)
+  --             --  only use null-ls for formatting instead of lsp server
+  --             return client2.name == "null-ls"
+  --           end,
+  --           bufnr = bufnr,
+  --           async = true,
+  --         }
+  --         -- vim.lsp.format {timeout = 5000}
+  --       end,
+  --     })
+  --   end
+  -- end,
 }

@@ -9,25 +9,22 @@ local options = {
     "luacheck",
 
     -- "eslint_d",
-    -- "eslint",
+    "eslint",
     "prettierd",
-    "stylelint",
+    "stylelint-lsp",
     "jsonlint",
     "jq",
 
     "shfmt",
     "shellcheck",
 
-    "fish",
-
     "clang_format",
-    "cppcheck",
+    "cpptools",
     "rustfmt",
 
     -- "autopep8",
     "isort",
     "pylint",
-    "refactoring",
     "flake8",
     "black",
     -- "yapf",
@@ -40,7 +37,6 @@ local options = {
     "staticcheck",
     -- "revive",
 
-    "php",
     "phpstan",
     "psalm",
     "phpcbf",
@@ -56,15 +52,9 @@ local options = {
 
     "write_good",
     "editorconfig_checker",
-    "dotenv_linter",
-    "trail_space",
     "codespell",
 
-    "checkmake",
-    "cmake_lint",
-
-    "dictionary",
-    "printenv",
+    "cmakelint",
 
     "gitlint",
   },
