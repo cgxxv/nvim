@@ -1,9 +1,9 @@
 local overrides = require "custom.configs.overrides"
 
 return {
-  { "christoomey/vim-tmux-navigator", lazy = false },
+  -- { "christoomey/vim-tmux-navigator", lazy = false },
 
-  { "szw/vim-maximizer", lazy = false },
+  -- { "szw/vim-maximizer", lazy = false },
 
   {
     "numToStr/Comment.nvim",
@@ -68,15 +68,36 @@ return {
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
-  },
-
-  {
-    "fatih/vim-go",
+    -- opts = overrides.nvimtree,
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
-      vim.g.go_addtags_transform = "camelcase"
+      require("nvim-tree").setup {}
     end,
   },
+
+  -- {
+  --   "fatih/vim-go",
+  --   config = function()
+  --     vim.g.go_addtags_transform = "camelcase"
+  --   end,
+  -- },
+
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    config = function(_, opts)
+      require("gopher").setup(opts)
+      -- require("core.utils").load_mappings "gopher"
+    end,
+    build = function()
+      vim.cmd [[silent! GoInstallDeps]]
+    end,
+  },
+
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {

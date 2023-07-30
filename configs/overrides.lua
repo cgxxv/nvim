@@ -40,26 +40,26 @@ M.treesitter = {
   auto_install = true,
 }
 
--- git support in nvimtree
-M.nvimtree = {
-  -- filters = {
-  --   dotfiles = false,
-  -- },
-  git = {
-    enable = true,
-    ignore = false,
-  },
-
-  update_cwd = false,
-  renderer = {
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
-  },
-}
+-- -- git support in nvimtree
+-- M.nvimtree = {
+--   -- filters = {
+--   --   dotfiles = false,
+--   -- },
+--   git = {
+--     enable = true,
+--     ignore = false,
+--   },
+--
+--   update_cwd = false,
+--   renderer = {
+--     highlight_git = true,
+--     icons = {
+--       show = {
+--         git = true,
+--       },
+--     },
+--   },
+-- }
 
 M.telescope = {
   -- defaults = {},

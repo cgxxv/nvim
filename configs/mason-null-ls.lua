@@ -16,7 +16,7 @@ local options = {
     "jq",
 
     "shfmt",
-    "shellcheck",
+    -- "shellcheck",
 
     "clang_format",
     "cpptools",

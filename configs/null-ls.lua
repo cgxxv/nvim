@@ -49,7 +49,7 @@ local sources = {
 
   -- Shell
   b.formatting.shfmt,
-  b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
+  -- b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
 
   -- fish
   -- b.diagnostics.fish,
@@ -94,6 +94,7 @@ local sources = {
   -- tools
   b.diagnostics.checkmake,
   b.diagnostics.cmake_lint,
+  -- b.diagnostics.dotenv_linter,
 
   -- b.code_actions.gitsigns,
   b.diagnostics.gitlint,
@@ -137,26 +138,26 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup {
   -- debug = true,
   sources = sources,
-  -- on_attach = function(client, bufnr)
-  --   -- async_formatting(bufnr)
-  --   if client.supports_method "textDocument/formatting" then
-  --     vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-  --     vim.api.nvim_create_autocmd("BufWritePost", {
-  --       group = augroup,
-  --       buffer = bufnr,
-  --       callback = function()
-  --         -- async_formatting(bufnr)
-  --         vim.lsp.buf.format {
-  --           filter = function(client2)
-  --             --  only use null-ls for formatting instead of lsp server
-  --             return client2.name == "null-ls"
-  --           end,
-  --           bufnr = bufnr,
-  --           async = true,
-  --         }
-  --         -- vim.lsp.format {timeout = 5000}
-  --       end,
-  --     })
-  --   end
-  -- end,
+  on_attach = function(client, bufnr)
+    -- async_formatting(bufnr)
+    if client.supports_method "textDocument/formatting" then
+      vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          -- async_formatting(bufnr)
+          vim.lsp.buf.format {
+            filter = function(client2)
+              --  only use null-ls for formatting instead of lsp server
+              return client2.name == "null-ls"
+            end,
+            bufnr = bufnr,
+            async = true,
+          }
+          -- vim.lsp.format {timeout = 5000}
+        end,
+      })
+    end
+  end,
 }
