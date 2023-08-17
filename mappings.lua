@@ -21,10 +21,22 @@ M.general = {
 
     ["<leader>rb"] = { "<Cmd>lua require('refactoring').refactor('Extract Block')<CR>" },
     ["<leader>rbf"] = { "<Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>" },
-    ["<leader>ri"] = {"<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>"},
-    ["<leader>rp"] = {":lua require('refactoring').debug.printf({below = false})<CR>"},
-    ["<leader>rpv"] = {":lua require('refactoring').debug.print_var({ normal = true })<CR>"},
-    ["<leader>rc"] = {":lua require('refactoring').debug.cleanup({})<CR>"},
+    ["<leader>ri"] = { "<Cmd>lua require('refactoring').refactor('Inline Variable')<CR>" },
+    ["<leader>rp"] = { ":lua require('refactoring').debug.printf({below = false})<CR>" },
+    ["<leader>rpv"] = { ":lua require('refactoring').debug.print_var({ normal = true })<CR>" },
+    ["<leader>rc"] = { ":lua require('refactoring').debug.cleanup({})<CR>" },
+
+    ["<leader>3n"] = { "<Cmd>NnnPicker<CR>" },
+    ["<leader>3ne"] = { "<Cmd>NnnExplorer %:p:h<CR>" },
+    ["<leader>2f"] = { "<Cmd>Lf<CR>" },
+
+    ["<leader>aa"] = { "<Cmd>Lspsaga code_action<CR>" },
+    ["<leader>af"] = { "<Cmd>Lspsaga finder<CR>" },
+    ["<leader>afi"] = { "<Cmd>Lspsaga finder imp<CR>" },
+    ["<leader>at"] = { "<Cmd>Lspsaga term_toggle<CR>" },
+    ["<leader>an"] = { "<Cmd>Lspsaga diagnostic_jump_next<CR>" },
+    ["<leader>ap"] = { "<Cmd>Lspsaga diagnostic_jump_prev<CR>" },
+    ["<leader>ao"] = { "<Cmd>Lspsaga outline<CR>" },
   },
 
   v = {
@@ -32,8 +44,8 @@ M.general = {
     ["<leader>rf"] = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>", "" },
     ["<leader>rv"] = { "<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>" },
     ["<leader>ri"] = { "<Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>" },
-    ["<leader>rr"] = {"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>"},
-    ["<leader>rpv"] = {":lua require('refactoring').debug.print_var({})<CR>"},
+    ["<leader>rr"] = { "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>" },
+    ["<leader>rpv"] = { ":lua require('refactoring').debug.print_var({})<CR>" },
   },
 }
 

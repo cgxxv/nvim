@@ -26,7 +26,7 @@ M.servers = {
   "awk_ls",
 
   "dockerls",
-  "docker_compose_language_service",
+  -- "docker_compose_language_service",
 }
 
 M.setup = function()

@@ -139,16 +139,18 @@ return {
     config = function()
       require("lspsaga").setup {
         -- keybinds for navigation in lspsaga window
-        scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
+        -- scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
         -- use enter to open file with definition preview
-        definition = {
-          edit = "<CR>",
-        },
-        ui = {
-          colors = {
-            normal_bg = "#022746",
-          },
-        },
+        -- definition = {
+        --   keys = {
+        --     edit = "o",
+        --   },
+        -- },
+        -- ui = {
+        --   colors = {
+        --     normal_bg = "#022746",
+        --   },
+        -- },
         extract_var_statements = {
           go = "%s := %s // poggers",
           cpp = {
@@ -228,6 +230,15 @@ return {
       require("toggleterm").setup()
     end,
   },
+
+  {
+    "luukvbaal/nnn.nvim",
+    lazy = false,
+    config = function()
+      require("nnn").setup()
+    end,
+  },
+
   {
     "lmburns/lf.nvim",
     lazy = false,
@@ -247,7 +258,7 @@ return {
         -- highlights = { NormalFloat = { guibg = "NONE" }, FloatBorder = { guifg = "NONE" } },
         winblend = 0,
       }
-      vim.keymap.set("n", "<Leader>2f", ":Lf<CR>")
+      -- vim.keymap.set("n", "<Leader>2f", ":Lf<CR>")
     end,
   },
 
