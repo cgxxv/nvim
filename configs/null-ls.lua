@@ -61,7 +61,7 @@ local sources = {
   -- b.diagnostics.clang_check,
 
   -- python
-  b.diagnostics.flake8,
+  b.diagnostics.flake8.with { extra_args = { "--max-line-length", "160" } },
   b.formatting.black,
   b.formatting.isort,
 
