@@ -62,7 +62,7 @@ local sources = {
 
   -- python
   b.diagnostics.flake8.with { extra_args = { "--max-line-length", "160" } },
-  b.formatting.black,
+  b.formatting.black.with { extra_args = { "--line-length", "160" } },
   b.formatting.isort,
 
   -- golang
