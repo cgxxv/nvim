@@ -2,7 +2,7 @@ vim.g.mapleader = ","
 -- vim.opt.laststatus = 2
 vim.api.nvim_set_option("titlestring", "%{hostname()}  %F  %{strftime('%Y-%m-%d %H:%M',getftime(expand('%')))}")
 -- vim.api.nvim_set_option("statusline", "+%F")
-vim.api.nvim_set_option("shell", "/opt/local/bin/fish")
+-- vim.api.nvim_set_option("shell", "/opt/local/bin/fish")
 
 vim.opt.relativenumber = true -- show relative line numbers
 vim.opt.cursorline = true -- highlight the current cursor line

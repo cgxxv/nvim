@@ -14,7 +14,6 @@ M.servers = {
   "svelte",
   "tailwindcss",
 
-  "yamlls",
   "pyright",
   "gopls",
   "rust_analyzer",
@@ -24,6 +23,9 @@ M.servers = {
 
   "sqlls",
   "awk_ls",
+
+  "helm_ls",
+  "yamlls",
 
   "dockerls",
   -- "docker_compose_language_service",

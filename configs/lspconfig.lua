@@ -8,7 +8,7 @@ local servers = require("custom.configs.mason-lsp").servers
 for _, lsp in ipairs(servers) do
   local opt = {
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
   }
   if lsp == "emmet_ls" then
     opt["filetypes"] = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" }

@@ -30,23 +30,29 @@ return {
     end,
   },
 
+  -- towolf/vim-helm provides basic syntax highlighting and filetype detection
+  -- ft = 'helm' is important to not start yamlls
+  { "towolf/vim-helm", ft = "helm" },
+  -- { "sheerun/vim-polyglot" },
+
   {
     "neovim/nvim-lspconfig",
     -- lazy = false,
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
     },
+    event = { "BufReadPre", "BufNewFile", "BufEnter" },
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end,
   },
 
-  -- {
-  --   "williamboman/mason.nvim",
-  --   lazy = false,
-  --   -- opts = overrides.mason,
-  -- },
+  {
+    "williamboman/mason.nvim",
+    lazy = false,
+    -- opts = overrides.mason,
+  },
 
   {
     "jay-babu/mason-null-ls.nvim",
