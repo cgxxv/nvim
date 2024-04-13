@@ -1,11 +1,19 @@
-local M = {}
+require "nvchad.mappings"
 
-local opts = { noremap = true, silent = true, expr = false }
+-- add yours here
 
-M.general = {
+local map = vim.keymap.set
+
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("i", "jk", "<ESC>")
+-- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+local default_opts = { noremap = true, silent = true, expr = false }
+
+local general = {
   i = {
     -- use batter-escape instead
-    -- ["jk"] = { "<ESC>", "exit insert mode" },
+    ["jk"] = { "<ESC>", "exit insert mode" },
   },
   n = {
     ["<leader>nh"] = { ":nohl<CR>", "clear search highlights" },
@@ -51,7 +59,7 @@ M.general = {
 
 -- more keybinds!
 
-M.lspconfig = {
+local lspconfig = {
   n = {
     ["gf"] = { "<cmd>Lspsaga lsp_finder<CR>", "show definition, references" },
     ["gd"] = { "<cmd>Lspsaga peek_definition<CR>", "see definition and make edits in window" },
@@ -68,4 +76,17 @@ M.lspconfig = {
   },
 }
 
-return M
+local function set_keymaps(mapping_table)
+  for mode, mappings in pairs(mapping_table) do
+    for key, mapping in pairs(mappings) do
+      local lhs = key
+      local rhs = mapping[1]
+      local desc = mapping[2]
+      local opts = mapping[3] or default_opts
+      map(mode, lhs, rhs, opts, desc)
+    end
+  end
+end
+
+set_keymaps(general)
+set_keymaps(lspconfig)

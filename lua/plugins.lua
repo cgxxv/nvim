@@ -1,6 +1,14 @@
-local overrides = require "custom.configs.overrides"
+local overrides = require "configs.overrides"
 
 return {
+  {
+    "stevearc/conform.nvim",
+    -- event = 'BufWritePre', -- uncomment for format on save
+    config = function()
+      require "configs.conform"
+    end,
+  },
+
   -- { "christoomey/vim-tmux-navigator", lazy = false },
 
   -- { "szw/vim-maximizer", lazy = false },
@@ -17,7 +25,7 @@ return {
       "williamboman/mason.nvim",
     },
     config = function()
-      require("custom.configs.mason-lsp").setup()
+      require("configs.mason-lsp").setup()
     end,
   },
 
@@ -26,7 +34,7 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     -- lazy = false,
     config = function()
-      require "custom.configs.null-ls"
+      require "configs.null-ls"
     end,
   },
 
@@ -43,8 +51,8 @@ return {
     },
     event = { "BufReadPre", "BufNewFile", "BufEnter" },
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require("nvchad.configs.lspconfig").defaults()
+      require "configs.lspconfig"
     end,
   },
 
@@ -63,7 +71,7 @@ return {
       "jose-elias-alvarez/null-ls.nvim",
     },
     config = function()
-      require "custom.configs.mason-null-ls"
+      require "configs.mason-null-ls"
     end,
   },
 
