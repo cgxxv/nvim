@@ -2,8 +2,9 @@ require "nvchad.options"
 
 -- add yours here!
 
-local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
+local o = vim.opt
+
+-- o.cursorlineopt = "both" -- to enable cursorline!
 
 o.relativenumber = true -- show relative line numbers
 o.cursorline = true -- highlight the current cursor line
