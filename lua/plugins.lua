@@ -1,6 +1,26 @@
 local overrides = require "configs.overrides"
 
+local function set_theme(name)
+  local cur_theme = require("nvconfig").ui.theme
+  require("nvchad.utils").replace_word(cur_theme, name)
+  require("nvconfig").ui.theme = name
+  require("base46").load_all_highlights()
+end
+
 return {
+  {
+    "f-person/auto-dark-mode.nvim",
+    event = "VeryLazy",
+    config = {
+      update_interval = 1000,
+      set_dark_mode = function()
+        set_theme "github_dark"
+      end,
+      set_light_mode = function()
+        set_theme "github_light"
+      end,
+    },
+  },
   {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
