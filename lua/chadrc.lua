@@ -5,8 +5,8 @@
 local M = {}
 
 M.ui = {
-  -- theme_toggle = { "github_light", "github_light" },
-  -- theme = "github_light",
+  -- theme_toggle = { "github_dark", "github_dark" },
+  theme = "github_dark",
   transparency = true,
 
   -- hl_override = {
