@@ -1,43 +1,43 @@
 local M = {}
 
 M.treesitter = {
-  ensure_installed = {
-    "vim",
-    "lua",
+    ensure_installed = {
+        "vim",
+        "lua",
 
-    "json",
-    "javascript",
-    "typescript",
-    "tsx",
-    "yaml",
-    "scss",
-    "html",
-    "css",
-    "svelte",
+        "json",
+        "javascript",
+        "typescript",
+        "tsx",
+        "yaml",
+        "scss",
+        "html",
+        "css",
+        "svelte",
 
-    "bash",
-    "c",
-    "cpp",
-    "go",
-    "rust",
-    "python",
-    "sql",
-    "php",
+        "bash",
+        "c",
+        "cpp",
+        "go",
+        "rust",
+        "python",
+        "sql",
+        "php",
 
-    "make",
-    "cmake",
+        "make",
+        "cmake",
 
-    "markdown",
-    "markdown_inline",
+        "markdown",
+        "markdown_inline",
 
-    "regex",
+        "regex",
 
-    "graphql",
-    "dockerfile",
-    "gitignore",
-  },
-  autotag = { enable = true },
-  auto_install = true,
+        "graphql",
+        "dockerfile",
+        "gitignore",
+    },
+    autotag = { enable = true },
+    auto_install = true,
 }
 
 -- -- git support in nvimtree
@@ -62,8 +62,8 @@ M.treesitter = {
 -- }
 
 M.telescope = {
-  -- defaults = {},
-  extensions_list = { "refactoring" },
+    -- defaults = {},
+    extensions_list = { "refactoring" },
 }
 
 return M

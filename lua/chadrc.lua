@@ -5,14 +5,14 @@
 local M = {}
 
 M.ui = {
-  -- theme_toggle = { "github_dark", "github_dark" },
-  theme = "github_dark",
-  transparency = true,
+    -- theme_toggle = { "github_dark", "github_dark" },
+    -- theme = "github_dark",
+    transparency = true,
 
-  -- hl_override = {
-  -- 	Comment = { italic = true },
-  -- 	["@comment"] = { italic = true },
-  -- },
+    -- hl_override = {
+    -- 	Comment = { italic = true },
+    -- 	["@comment"] = { italic = true },
+    -- },
 }
 
 return M
