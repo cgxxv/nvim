@@ -1,9 +1,9 @@
 local overrides = require "configs.overrides"
 
 local function set_theme(name)
-    local cur_theme = require("nvconfig").ui.theme
+    local cur_theme = require("nvconfig").base46.theme
     require("nvchad.utils").replace_word(cur_theme, name)
-    require("nvconfig").ui.theme = name
+    require("nvconfig").base46.theme = name
     require("base46").load_all_highlights()
 end
 
@@ -61,7 +61,7 @@ return {
 
     -- towolf/vim-helm provides basic syntax highlighting and filetype detection
     -- ft = 'helm' is important to not start yamlls
-    { "towolf/vim-helm",     ft = "helm" },
+    { "towolf/vim-helm", ft = "helm" },
     -- { "sheerun/vim-polyglot" },
 
     {
@@ -224,8 +224,8 @@ return {
                 defaults = {
                     mappings = {
                         i = {
-                            ["<C-k>"] = actions.move_selection_previous,                       -- move to prev result
-                            ["<C-j>"] = actions.move_selection_next,                           -- move to next result
+                            ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+                            ["<C-j>"] = actions.move_selection_next, -- move to next result
                             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
                         },
                     },
