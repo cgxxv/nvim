@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo port install -y shellcheck
+brew install shellcheck
 
 # npm i -g tree-sitter-cli
 npm i -g eslint jshint prettier #@fsouza/prettierd
@@ -10,9 +10,10 @@ npm i -g yaml-language-server
 npm i -g svelte-language-server
 npm i -g rustywind
 
-cargo install stylua dotenv-linter
-cargo install --features lsp --locked taplo-cli
-cargo install tree-sitter-cli
+cargo binstall stylua dotenv-linter -y
+# cargo binstall --features lsp --locked taplo-cli -y
+cargo binstall --locked taplo-cli -y
+cargo binstall tree-sitter-cli -y
 
 luarocks install luacheck
 
